@@ -18,45 +18,44 @@ for comp in comps:
     deadline = getattr(comp, "deadline")
     if start.date() < deadline.date() and deadline.date() < end.date():
         i += 1
-fout = open(f"{os.environ['HOME']}/Desktop/new.txt", "w")
-for comp in comps:
-    deadline = getattr(comp, "deadline")
-    if start.date() < deadline.date() and deadline.date() < end.date():
-        title = comp.title.replace(":", ";").replace("'", "")
-        desc = comp.description.replace(":", ";").replace("'", "")
-        kind = comp.category
-        prize = comp.reward
-        team = comp.teamCount
-        try:
-            team = "{:,}".format(int(team))
-        except Exception:
-            team = "-"
-        metric = comp.evaluationMetric
-        if metric is not None and len(metric) > 0:
-            metric = metric.replace(":", ";").replace("'", "")
-        else:
-            metric = "-"
-        link = "https://www.kaggle.com/c/" + comp.ref
-        image = "https://storage.googleapis.com/kaggle-competitions/kaggle/---/logos/thumb76_76.png"
-        year = deadline.year
-        isHot = "false"
-        done = "false"
-        print(f"  - number: '{i}'", file=fout)
-        print(f"    title: '{title}'", file=fout)
-        print(f"    desc: '{desc}'", file=fout)
-        print(f"    kind: '{kind}'", file=fout)
-        print(f"    prize: '{prize}'", file=fout)
-        print(f"    team: '{team}'", file=fout)
-        print(f"    metric: '{metric}'", file=fout)
-        print(f"    link: '{link}'", file=fout)
-        print(f"    image: '{image}'", file=fout)
-        print(f"    year: '{year}'", file=fout)
-        print(f"    isHot: '{isHot}'", file=fout)
-        print(f"    done: '{done}'", file=fout)
-        print(f"    solutions: ", file=fout)
-        for _ in range(3):
-            print(f"      - rank: ''", file=fout)
-            print(f"        link: ''", file=fout)
-            print(f"        kind: 'description'", file=fout)
-        i -= 1
-fout.close()
+with open(f"{os.environ['HOME']}/Desktop/new.txt", "w") as fout:
+    for comp in comps:
+        deadline = getattr(comp, "deadline")
+        if start.date() < deadline.date() and deadline.date() < end.date():
+            title = comp.title.replace(":", ";").replace("'", "")
+            desc = comp.description.replace(":", ";").replace("'", "")
+            kind = comp.category
+            prize = comp.reward
+            team = comp.teamCount
+            try:
+                team = "{:,}".format(int(team))
+            except Exception:
+                team = "-"
+            metric = comp.evaluationMetric
+            if metric is not None and len(metric) > 0:
+                metric = metric.replace(":", ";").replace("'", "")
+            else:
+                metric = "-"
+            link = f"https://www.kaggle.com/c/{comp.ref}"
+            image = "https://storage.googleapis.com/kaggle-competitions/kaggle/---/logos/thumb76_76.png"
+            year = deadline.year
+            isHot = "false"
+            done = "false"
+            print(f"  - number: '{i}'", file=fout)
+            print(f"    title: '{title}'", file=fout)
+            print(f"    desc: '{desc}'", file=fout)
+            print(f"    kind: '{kind}'", file=fout)
+            print(f"    prize: '{prize}'", file=fout)
+            print(f"    team: '{team}'", file=fout)
+            print(f"    metric: '{metric}'", file=fout)
+            print(f"    link: '{link}'", file=fout)
+            print(f"    image: '{image}'", file=fout)
+            print(f"    year: '{year}'", file=fout)
+            print(f"    isHot: '{isHot}'", file=fout)
+            print(f"    done: '{done}'", file=fout)
+            print("    solutions: ", file=fout)
+            for _ in range(3):
+                print("      - rank: ''", file=fout)
+                print("        link: ''", file=fout)
+                print("        kind: 'description'", file=fout)
+            i -= 1
